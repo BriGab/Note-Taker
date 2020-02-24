@@ -1,3 +1,4 @@
+![Note Taker App](public/assets/images/notetaker.JPG)
 # Note Taker
 
 This is a note taking application using Express and Node.js. This application has functionality to add, view, and delete notes that are being stored in a db.json file. 

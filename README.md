@@ -1,6 +1,8 @@
 ![Note Taker App](public/assets/images/notetaker.JPG)
 # Note Taker
 
+[Check out Note Taker on Heroku!](https://quiet-depths-34552.herokuapp.com/)
+
 This is a note taking application using Express and Node.js. This application has functionality to add, view, and delete notes that are being stored in a db.json file. 
 
 This application requires the following NPM modules: 

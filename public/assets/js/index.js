@@ -32,6 +32,13 @@ var deleteNote = function(id) {
   });
 };
 
+var editNote = function(id) {
+  return $.ajax({
+    url: "api/notes/" + id,
+    method: "PUT"
+  })
+};
+
 // If there is an activeNote, display it, otherwise render empty inputs
 var renderActiveNote = function() {
   $saveNoteBtn.hide();
@@ -61,6 +68,28 @@ var handleNoteSave = function() {
     renderActiveNote();
   });
 };
+
+var handleEdit = function (event) {
+  event.stopPropagation();
+  renderActiveNote();
+  console.log("got here")
+  var note = $(this)
+    .parent(".list-group-item")
+    .data();
+
+    if (activeNote.id === note.id) {
+      activeNote = {
+        title: $noteTitle.val(),
+        text: $noteText.val()
+      };
+    }
+  editNote(note.id).then(function() {
+    saveNote(activeNote);
+    getAndRenderNotes();
+    renderActiveNote();
+  })
+    console.log(note)
+}
 
 // Delete the clicked note
 var handleNoteDelete = function(event) {
@@ -117,8 +146,11 @@ var renderNoteList = function(notes) {
     var $delBtn = $(
       "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
     );
+    var $editBtn = $(
+      "<i class='penStyle fas fa-pen text-light edit-note float-right'>"
+    );
 
-    $li.append($span, $delBtn);
+    $li.append($span, $delBtn, $editBtn);
     noteListItems.push($li);
   }
 
@@ -133,6 +165,7 @@ var getAndRenderNotes = function() {
 };
 
 $saveNoteBtn.on("click", handleNoteSave);
+$noteList.on("click", ".edit-note", handleEdit);
 $noteList.on("click", ".list-group-item", handleNoteView);
 $newNoteBtn.on("click", handleNewNoteView);
 $noteList.on("click", ".delete-note", handleNoteDelete);

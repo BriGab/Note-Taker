@@ -41,11 +41,12 @@ var editNote = function(id) {
 
 // If there is an activeNote, display it, otherwise render empty inputs
 var renderActiveNote = function() {
-  $saveNoteBtn.hide();
+  console.log("got here active note")
+  // $saveNoteBtn.hide();
 
   if (activeNote.id) {
-    $noteTitle.attr("readonly", true);
-    $noteText.attr("readonly", true);
+    // $noteTitle.attr("readonly", true);
+    // $noteText.attr("readonly", true);
     $noteTitle.val(activeNote.title);
     $noteText.val(activeNote.text);
   } else {
@@ -71,7 +72,7 @@ var handleNoteSave = function() {
 
 var handleEdit = function (event) {
   event.stopPropagation();
-  renderActiveNote();
+  handleNoteView();
   console.log("got here")
   var note = $(this)
     .parent(".list-group-item")
@@ -112,6 +113,7 @@ var handleNoteDelete = function(event) {
 
 // Sets the activeNote and displays it
 var handleNoteView = function() {
+  console.log("isplaying it")
   activeNote = $(this).data();
   renderActiveNote();
 };
